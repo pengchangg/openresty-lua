@@ -1,0 +1,6 @@
+{
+    "workspace.library": [
+        "/usr/local/nvim/share/nvim/runtime",
+        "${3rd}/OpenResty/library"
+    ]
+}

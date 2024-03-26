@@ -1,0 +1,5 @@
+/.vscode
+/nginx/logs
+/nginx/conf/nginx_statistics.conf
+data.log
+statistics

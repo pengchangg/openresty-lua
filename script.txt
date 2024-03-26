@@ -1,0 +1,30 @@
+{
+  "id":12331,# 有id修改。无则增加
+  "type": "event or timer",
+  "event_id": " type == event",
+  "timer_type": " type == timer , fixed or interval,'fixed'(固定时刻执行) or 'interval'(固定间隔时间执行) 互斥",
+  "timer": 30, # timer == interval 秒
+  "day": 1, # 1-31
+  "week": 1, # 1-7
+  "hour": 1, # 0-23
+  "minute": 1,# 1-60
+  // lua 脚本格式 type == event
+  "func": "return function(static, evnet)
+              local t = static:get('xxx')
+              static:append('demo',{timet = t})
+              local user = static:get_user(event.uid)
+              user:get('asdf')  --- user.get(hash-key)
+              user:set(hashmap)  --- user.set(data={})
+              static:incr('xxx',1)
+        end",
+  # type == timer
+  "func": "return function(static)
+              local t = static:get('xxx')
+              static:append('demo',{timet = t})
+              local user = static:get_user(uid)
+              user:get('asdf')  --- user.get(hash-key)
+              user:set(hashmap)  --- user.set(data={})
+              user:get('asdf')  --- user.get(user,'asdf')
+              static:incr('xxx',1)
+        end"
+}

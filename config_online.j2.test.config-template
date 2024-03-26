@@ -1,0 +1,48 @@
+if not core then
+	-- nginx 相关配置
+	local ngx_config = require 'utils.conf.default'
+
+	ngx_config.user = 'root'
+	ngx_config.worker_num = 2
+	ngx_config.access_log = false
+	ngx_config.worker_rlimit_nofile = 8192
+
+	ngx_config.loglevel = 'info'
+
+	--对外服务端口号
+	ngx_config.http_ports = { 80 }
+end
+
+-- app 相关配置
+local app_config = require 'config'
+
+-- app debug 模式
+app_config.debug = true
+app_config.env = 'test'
+app_config.record_request_info = false
+app_config.use_websocket_autobalance = true
+app_config.http_ports = { 80 }
+app_config.remoteResourcesPath = '{{remoteResourcesPath}}'
+
+
+-- db配置
+app_config.db.mysql = {
+    type = 'mysql',
+    host = '{{mysql.statistics.master.host}}',
+    port = {{mysql.statistics.master.port}},
+    user = '{{mysql.statistics.master.username}}',
+    password = '{{mysql.statistics.master.password}}',
+    database = '{{mysql.statistics.master.database}}',
+    concurrency = 4,		--最大读写并发数,默认100
+}
+
+
+app_config.db.redis = {
+	type = 'redis',
+    host = '{{redis.statistics.host}}',
+    port = {{redis.statistics.port}},
+    password = '{{redis.statistics.password}}',
+	max_idle_time = 0,
+	concurrency = 1000,	--最大读写并发数,默认1000
+}
+
