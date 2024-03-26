@@ -9,34 +9,34 @@ local route_check = require("common.check_route")
 --初始化,服务启动时调用
 --可选
 _M.init = function()
-	local init_db = require("common.init_db")
-	init_db.init()
+	-- local init_db = require("common.init_db")
+	-- init_db.init()
 
-	app.thread_report = core.thread.pool:new(1000, 10000)
-	app.thread_report:run()
-
-	app.thread_statistics = core.thread.pool:new(1000, 10000)
-	app.thread_statistics:run()
-
-	local collector = require("data.collector")
-	collector.run()
+	-- app.thread_report = core.thread.pool:new(1000, 10000)
+	-- app.thread_report:run()
+	--
+	-- app.thread_statistics = core.thread.pool:new(1000, 10000)
+	-- app.thread_statistics:run()
+	--
+	-- local collector = require("data.collector")
+	-- collector.run()
 
 	-- 定时脚本合集 [appname][func1,func2]
-	app.cron_conf = {}
+	-- app.cron_conf = {}
 
 	-- 每个app的脚本使用的资源
-	app.statics = {}
+	-- app.statics = {}
 
 	-- 加载所有脚本
-	local scripts = require("data.scripts")
-	scripts.load()
+	-- local scripts = require("data.scripts")
+	-- scripts.load()
 
 	-- 应用的 appname-secret  用于检验是否启用该应用和鉴权
-	app.application = {}
-	local applications = require("data.application")
-	applications.init()
-
-	route_check.init_chekers(app.application)
+	-- app.application = {}
+	-- local applications = require("data.application")
+	-- applications.init()
+	--
+	-- route_check.init_chekers(app.application)
 
 	console("app init done...")
 end
