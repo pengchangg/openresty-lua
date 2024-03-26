@@ -1,5 +1,7 @@
 # zxor
 
+> 前置需要openresty环境
+
 
 ```
 zxor/zxor --help
